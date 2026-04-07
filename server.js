@@ -4,28 +4,25 @@ const nodemailer = require("nodemailer");
 
 const app = express();
 
-// Middleware
 app.use(cors());
 app.use(express.json());
 
-
-// ✅ Test route (IMPORTANT for Render)
+// Test route
 app.get("/", (req, res) => {
   res.send("Server is running");
 });
 
-
-// ✅ Email sending route
+// Send email
 app.post("/send-email", async (req, res) => {
   try {
     const { to, subject, message } = req.body;
 
-    let transporter = nodemailer.createTransport({
+    const transporter = nodemailer.createTransport({
       service: "gmail",
       auth: {
         user: "navyakammampati9604@gmail.com",
         pass: "npod exqr rjdq vkim"          
-      }"           
+      }"
       }
     });
 
@@ -38,16 +35,14 @@ app.post("/send-email", async (req, res) => {
 
     res.send("Email sent successfully");
   } catch (error) {
-    console.error(error);
+    console.log(error);
     res.status(500).send("Error sending email");
   }
 });
 
-
-// ✅ PORT for Render (VERY IMPORTANT)
+// Port (Render)
 const PORT = process.env.PORT || 5000;
 
 app.listen(PORT, () => {
   console.log("Server running on port " + PORT);
 });
-      
