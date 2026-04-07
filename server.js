@@ -5,6 +5,13 @@ const cors = require("cors");
 const app = express();
 app.use(cors());
 app.use(express.json());
+app.get("/", (req, res) => {
+  res.send("Server is running");
+});
+
+app.post("/send-email", async (req, res) => {
+  // your email code
+});
 
 app.post("/send-email", async (req, res) => {
   const { email, subject, message } = req.body;
